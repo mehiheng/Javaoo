@@ -1,11 +1,10 @@
 package practice09;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Teacher extends Person {
-    LinkedList<Klass> klass;
-    public Teacher(int Myid,String Myname,int Myage,LinkedList<Klass> Myklass){
+    Klass klass;
+    public Teacher(int Myid,String Myname,int Myage,Klass Myklass){
         super(Myid,Myname,Myage);
         klass=Myklass;
     }
@@ -15,11 +14,7 @@ public class Teacher extends Person {
     }
     public String introduce(){
         if(klass!=null){
-            String klasses="";
-            for(int i=0;i<klass.size();i++){
-                klasses+=(((klass.get(i).number))+", ");
-            }
-            String result=(super.introduce()+" I am a Teacher. I teach Class "+klasses+".");
+            String result=(super.introduce()+" I am a Teacher. I teach Class "+klass.number+".");
             result= result.replace(", .",".");
             return result;
         }else{
@@ -27,7 +22,7 @@ public class Teacher extends Person {
         }
     }
     public String introduceWith(Student student){
-        if(klass.contains(student.klass)){
+        if(klass==student.klass){
             return super.introduce()+" I am a Teacher. I teach "+student.name+".";
         }else{
             return super.introduce()+" I am a Teacher. I don't teach "+student.name+"." ;
@@ -35,7 +30,7 @@ public class Teacher extends Person {
     }
     public boolean isTeaching(Student student){
         boolean result=false;
-        if(klass.contains(student.klass)){
+        if(klass==student.klass){
             result=true;
         }
         return  result;
@@ -47,7 +42,8 @@ public class Teacher extends Person {
     public int getAge(){
         return age;
     }
-    public LinkedList<Klass> getClasses(){
+    public Klass getKlass(){
+
         return klass;
-    }
 }
+    }
